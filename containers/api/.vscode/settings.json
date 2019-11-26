@@ -1,0 +1,26 @@
+{
+  "python.pythonPath": ".venv\\Scripts\\python.exe",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
+  "python.formatting.provider": "black",
+  "editor.formatOnSave": true,
+  "python.linting.ignorePatterns": ["migrations/*/*.py"],
+  "python.formatting.blackArgs": [
+    "--exclude",
+    "migrations/",
+    "--line-length",
+    "79"
+  ],
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.venv": true,
+    "**/.coverage": true
+  }
+}
