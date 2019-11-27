@@ -10,6 +10,8 @@ black = "*"
 [packages]
 flask = "*"
 flask-restful = "*"
+flask-sqlalchemy = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"

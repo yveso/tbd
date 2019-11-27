@@ -15,3 +15,15 @@ services:
       - DATABASE_URL=postgres://postgres:postgres@api-db:5432/api_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@api-db:5432/api_test
       - SECRET_KEY=super_secret_key
+    depends_on:
+      - api-db
+
+  api-db:
+    build:
+      context: ./containers/api-db
+      dockerfile: Dockerfile
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
