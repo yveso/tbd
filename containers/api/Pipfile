@@ -12,6 +12,7 @@ flask = "*"
 flask-restful = "*"
 flask-sqlalchemy = "*"
 psycopg2-binary = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.7"
