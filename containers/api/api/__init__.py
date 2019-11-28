@@ -15,8 +15,10 @@ def create_app():
     from api import models
 
     from api.blueprints.ping import bp as ping_bp
+    from api.blueprints.users import bp as users_bp
 
     app.register_blueprint(ping_bp)
+    app.register_blueprint(users_bp)
 
     @app.shell_context_processor
     def ctx():
@@ -27,6 +29,20 @@ def create_app():
         pass
         db.drop_all()
         db.create_all()
+        db.session.commit()
+
+    @app.cli.command()
+    def seed_db():
+        db.session.add(
+            models.User(
+                username="Test", email="test@test.com", password="abc123"
+            )
+        )
+        db.session.add(
+            models.User(
+                username="Foo Bar", email="foo@bar.com", password="123abc"
+            )
+        )
         db.session.commit()
 
     return app
