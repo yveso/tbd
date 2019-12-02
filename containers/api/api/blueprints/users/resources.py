@@ -1,12 +1,9 @@
 from flask import request
-from flask_restful import Api, Resource
+from flask_restful import Resource
 from sqlalchemy import exc
 
 from api import db
 from api.models import User
-from . import bp
-
-api = Api(bp)
 
 
 class Users(Resource):
@@ -70,7 +67,3 @@ class UsersId(Resource):
                 return ({"status": "success", "data": user.to_json()}, 200)
         except ValueError:
             return error, 404
-
-
-api.add_resource(Users, "/users")
-api.add_resource(UsersId, "/users/<user_id>")
