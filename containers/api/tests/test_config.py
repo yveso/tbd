@@ -11,6 +11,7 @@ def test_TestingConfig():
         "DATABASE_TEST_URL"
     )
     assert app.config["SECRET_KEY"] == os.environ.get("SECRET_KEY")
+    assert app.config['BCRYPT_LOG_ROUNDS'] == 4
 
 
 def test_DevelopmentConfig():
@@ -22,6 +23,7 @@ def test_DevelopmentConfig():
         "DATABASE_URL"
     )
     assert app.config["SECRET_KEY"] == os.environ.get("SECRET_KEY")
+    assert app.config['BCRYPT_LOG_ROUNDS'] == 4
 
 
 def test_ProductionConfig():
@@ -33,3 +35,4 @@ def test_ProductionConfig():
         "DATABASE_URL"
     )
     assert app.config["SECRET_KEY"] == os.environ.get("SECRET_KEY")
+    assert app.config['BCRYPT_LOG_ROUNDS'] == 13

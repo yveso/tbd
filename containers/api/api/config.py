@@ -6,6 +6,7 @@ class BaseConfig:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     SECRET_KEY = os.environ.get("SECRET_KEY")
+    BCRYPT_LOG_ROUNDS = 4
 
 
 class DevelopmentConfig(BaseConfig):
@@ -18,4 +19,4 @@ class TestingConfig(BaseConfig):
 
 
 class ProductionConfig(BaseConfig):
-    pass
+    BCRYPT_LOG_ROUNDS = 13
