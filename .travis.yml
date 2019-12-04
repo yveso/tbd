@@ -20,6 +20,7 @@ before_script:
 script:
   - docker-compose exec api pytest --cov=api tests/
   - docker-compose exec api flake8 api
+  - docker-compose exec api flake8 tests
 
 after_script:
   - docker-compose down
