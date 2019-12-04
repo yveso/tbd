@@ -32,7 +32,6 @@ def create_app():
 
     @app.cli.command()
     def recreate_db():
-        pass
         db.drop_all()
         db.create_all()
         db.session.commit()
