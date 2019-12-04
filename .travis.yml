@@ -18,7 +18,7 @@ before_script:
   - docker-compose up -d --build
 
 script:
-  - docker-compose exec api pytest --cov=api tests/
+  - docker-compose exec api pytest --cov-report term-missing --cov=api tests/
   - docker-compose exec api flake8 api
   - docker-compose exec api flake8 tests
 
