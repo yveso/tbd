@@ -1,27 +1,34 @@
 import fetch from "isomorphic-unfetch";
+import AddUser from "../components/AddUser";
+import UsersList from "../components/UsersList";
+
+async function getUsers() {
+  const res = await fetch("http://localhost:5001/users");
+  const data = await res.json();
+
+  return data.data.users;
+}
 
 function Index(props) {
-  console.log(props);
+  const [users, setUsers] = React.useState(props.users);
+
+  function update() {
+    getUsers().then(newUsers => setUsers(newUsers));
+  }
+
   return (
     <div>
-      <h1>Users</h1>
-      <ul>
-        {props.users.map(user => (
-          <li key={user.id}>{user.username}</li>
-        ))}
-      </ul>
+      <AddUser update={update} />
+      <UsersList users={users} />
     </div>
   );
 }
 
 Index.getInitialProps = async function() {
-  const res = await fetch("http://localhost:5001/users");
-  const data = await res.json();
-
-  console.log(data);
+  const users = await getUsers();
 
   return {
-    users: data.data.users,
+    users,
   };
 };
 
