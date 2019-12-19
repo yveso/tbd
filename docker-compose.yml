@@ -28,6 +28,21 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
+  next-js:
+    build:
+      context: ./containers/next-js
+      dockerfile: Dockerfile
+    volumes:
+      - "./containers/next-js:/app"
+      - "/app/node_modules"
+      - "/app/.next"
+    ports:
+      - 3007:3000
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - api
+
   nginx:
     build:
       context: ./containers/nginx
@@ -37,3 +52,4 @@ services:
       - 80:80
     depends_on:
       - api
+      - next-js
