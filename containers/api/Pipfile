@@ -16,6 +16,7 @@ flask-migrate = "*"
 flask-bcrypt = "*"
 pytest-cov = "*"
 flake8 = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.7"

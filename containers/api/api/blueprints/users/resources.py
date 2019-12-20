@@ -34,8 +34,11 @@ class Users(Resource):
         password = post_data.get("password")
 
         try:
+            user_with_username = User.query.filter_by(
+                username=username
+            ).first()
             user_with_mail = User.query.filter_by(email=email).first()
-            if not user_with_mail:
+            if not (user_with_username or user_with_mail):
                 db.session.add(
                     User(username=username, email=email, password=password)
                 )
@@ -45,8 +48,12 @@ class Users(Resource):
                     201,
                 )
             else:
+                what = 'Username' if user_with_username else 'Email'
                 return (
-                    {"status": "fail", "message": "Email already exists."},
+                    {
+                        "status": "fail",
+                        "message": f"{what} already exists.",
+                    },
                     400,
                 )
         except exc.IntegrityError:

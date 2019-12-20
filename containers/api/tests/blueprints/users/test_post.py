@@ -49,6 +49,20 @@ def test_no_password(client):
     helpers.assert_data(data, "fail", "Invalid payload")
 
 
+def test_username_twice(client):
+    post(
+        client,
+        {"username": "John Doe", "email": "john@doe.com", "password": "123"},
+    )
+    response, data = post(
+        client,
+        {"username": "John Doe", "email": "john2@doe.com", "password": "456"},
+    )
+
+    helpers.assert_json_response(response, 400)
+    helpers.assert_data(data, "fail", "Username already exists.")
+
+
 def test_email_twice(client):
     post(
         client,
