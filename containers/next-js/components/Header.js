@@ -1,6 +1,20 @@
 import Link from "next/link";
+import Router from "next/router";
 import styled from "styled-components";
+import NProgress from "nprogress";
 import Nav from "./Nav";
+
+Router.onRouteChangeStart = function() {
+  NProgress.start();
+};
+
+Router.onRouteChangeComplete = function() {
+  NProgress.done();
+};
+
+Router.onRouteChangeError = function() {
+  NProgress.done();
+};
 
 const StyledHeader = styled.div`
   border-bottom: 10px solid ${p => p.theme.colors.black};
